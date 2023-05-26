@@ -1,0 +1,77 @@
+
+<h2>create new Media</h2>
+
+<div class="col-lg-6">
+    <div class="form-group">
+      <label class="form-control-label" for="input-email" >Name</label>
+      <input type="text" id="" class="form-control form-control-alternative"  [(ngModel)]="mediaData.name">
+    </div>
+
+    <div class="col-lg-4">
+        <div class="form-group">
+          <label class="form-control-label" for="input-country" >Hour</label>
+          <input type="number" id="input-postal-code" class="form-control form-control-alternative"[(ngModel)]="mediaData.hour" >
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label class="form-control-label" for="input-country">minutes</label>
+          <input type="number" id="input-postal-code" class="form-control form-control-alternative" [(ngModel)]="mediaData.minute">
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+            <label class="form-control-label" for="input-country">Type</label>
+      <select name="demo" id="#" [(ngModel)]="mediaData.type">
+        <option selected="selected" value="Drama">Drama</option>
+        <option value="comedy">comedy</option>
+        <option value="Action">Action</option>
+        </select>
+        </div>
+        </div>
+    <div class="form-group">
+        <label>Descreption</label>
+        <textarea rows="4" class="form-control form-control-alternative"
+         placeholder="A few words about you ..."[(ngModel)]="mediaData.description"></textarea>
+      </div>
+      <form [formGroup]="metadataForm" (ngSubmit)="onSubmit()">
+        <button class="btn btn-primary" (click)="addItem()" type="button">+ </button>
+        <label>add metdata</label>
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Value</td>
+         
+          <td>Remove</td>
+        </tr>
+      </thead>
+      <tbody formArrayName="metadata"
+        *ngFor="let item of metadataForm.get('metadata')['controls']; let i = index;">
+        <tr [formGroupName]="i">
+           <td><input type="text" formControlName="name"></td>
+           <td><input type="text" formControlName="value"></td>
+        
+           <td><button type="button" (click)="removeRow(i)">X {{i}}</button></td>
+        </tr>
+      </tbody>
+    </table>
+    
+     <!-- <button type="submit">Submit</button> -->
+    </form>
+<label>Choose Tags</label>
+    <form [formGroup]="myForm">
+        <ng-multiselect-dropdown
+            name="tag"
+            [placeholder]="'Select Tag'"
+            [settings]="dropdownSettings"
+            [data]="tags"
+            formControlName="tag"
+            [disabled]="disabled"
+            
+            (onSelect)="onItemSelect($event)">
+        </ng-multiselect-dropdown>
+   </form>
+
+
+   <button class="btn btn-primary" (click)="printItem()" type="button">Save</button>
